@@ -1,0 +1,15 @@
+<table border="1">
+            <tr>
+                <td>Описание расходов</td>
+                <td>Сумма расхода</td>
+                <td>Дата</td>
+
+            </tr>
+            {% for person in persons %}
+                <tr>
+                    <td>{{ person.description }}</td>
+                    <td>{{ person.amount }}</td>
+                    <td>{{ person.date }}</td>
+                </tr>
+            {% endfor %}
+        </table>
