@@ -9,6 +9,12 @@ def expense(request):
     return render(request, 'index.html', {'exp': exp})
 
 
+def edit(request, expense_id):
+    expense = ExpenseDetail.objects.get(expense_id=expense_id)
+    name = Expense.objects.filter(id = expense_id).all()
+    return render(request, 'expense.html', {'expense': expense, 'name': name })
+
+
 class AddExpense(CreateView):
     template_name = 'create_expense.html'
     success_url = '/'
