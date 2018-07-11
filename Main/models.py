@@ -35,7 +35,7 @@ class ExpenseDetail (models.Model):
     description = models.TextField(verbose_name="Описание расходов")
     amount = models.IntegerField(verbose_name="Сумма расходов")
     date = models.DateField(verbose_name="Дата расхода")
-    is_family =models.BooleanField(verbose_name="Семейные расходы")
+
     person = models.ForeignKey(Person, related_name='persons',
                                 on_delete=models.CASCADE, verbose_name="Люди")
 
