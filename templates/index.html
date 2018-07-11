@@ -2,22 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Категории</title>
+    <title>Человек</title>
 </head>
 <body>
 
-<table border="1">
-            <tr>
-                <td>Категория</td>
-             </tr>
-
-{% for exp in exp %}
-    <tr>
-<td> <a href="{% url 'edit' exp.id %}"><h3>{{ exp.name }}</h3>
-                      </a></td>
-</tr>
+ {% for person in person %}
+   <a href="{% url 'person' person.id %}"><h3>{{ person.name }}</h3></a>
+{#    <table border="1">#}
+{#        <tr>#}
+{#            <td>Категория</td>#}
+{#        </tr>#}
+{##}
+{#        {% for expense in expenses %}#}
+{#            <tr>#}
+{#                <td><a href="{% url 'edit' expense.id %}">#}
+{#                    <h3>{{ expense.name }}</h3>#}
+{#                </a></td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#    </table>#}
 {% endfor %}
-</table>
 </body>
 </html>
 

@@ -6,14 +6,19 @@ from django.db.models import Sum
 
 
 def expense(request):
-    exp = Expense.objects.all()
-    return render(request, 'index.html', {'exp': exp})
+    # details = {
+    #     person: [
+    #         detail.expense for detail in person.exp_details.all()
+    #     ] for person in Person.objects.all()
+    # }
+    person = Person.objects.all()
+    return render(request, 'index.html', {'person': person})
 
 
 def edit(request, expense_id):
-    expense = ExpenseDetail.objects.get(expense_id=expense_id)
-    name = Expense.objects.filter(id = expense_id).all()
-    return render(request, 'expense.html', {'expense': expense, 'name': name })
+    expense = ExpenseDetail.objects.filter(expense_id=expense_id).all()
+    name = Expense.objects.filter(id = expense_id).first()
+    return render(request, 'edit.html', {'expense': expense, 'name': name })
 
 
 class AddExpense(CreateView):

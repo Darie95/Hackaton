@@ -36,7 +36,7 @@ class ExpenseDetail (models.Model):
     amount = models.IntegerField(verbose_name="Сумма расходов")
     date = models.DateField(verbose_name="Дата расхода")
 
-    person = models.ForeignKey(Person, related_name='persons',
+    person = models.ForeignKey(Person, related_name='exp_details',
                                 on_delete=models.CASCADE, verbose_name="Люди")
 
     expense = models.ForeignKey(Expense, related_name='expenses',
