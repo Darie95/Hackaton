@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name.name }}</title>
+</head>
+<body>
+
+<table border="1">
+            <tr>
+                <td>Категория</td>
+             </tr>
+
+{% for expense in expense %}
+    <tr>
+        <td> <h3>{{ expense.description }}</h3></td>
+        <td> <h3>{{ expense.amount }}</h3></td>
+        <td> <h3>{{ expense.date }}</h3></td>
+
+</tr>
+{% endfor %}
+</table>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
