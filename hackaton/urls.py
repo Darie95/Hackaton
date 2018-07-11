@@ -25,7 +25,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', views.expense),
     url(r'^addcategory/$', views.AddExpense.as_view()),
-    url(r'^person/(?P<person_id>\d+)/', views.person)
+    url(r'^person/(?P<person_id>\d+)/$', views.person),
+    url(r'^person/(?P<person_id>\d+)/date/$', views.Search.as_view()),
+url(r'^edit/(?P<expense_id>\d+)/$', views.edit, name = 'edit'),
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

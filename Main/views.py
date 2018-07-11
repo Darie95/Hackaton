@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from Main.forms import ExpenseCreateForm
-from Main.models import Expense, ExpenseDetail
-from django.views.generic import CreateView
+from Main.forms import ExpenseCreateForm, SearchForm
+from Main.models import Expense, ExpenseDetail, Income, Person
+from django.views.generic import CreateView, FormView
+from django.db.models import Sum
 
 
 def expense(request):
@@ -31,5 +32,37 @@ class AddExpense(CreateView):
 
 
 def person(request, person_id):
-    context = {'persons': ExpenseDetail.objects.filter(id=person_id).all()}
+    a = ExpenseDetail.objects.filter(person=person_id).aggregate(Sum('amount'))
+    b = ExpenseDetail.objects.filter(person=person_id).aggregate(Sum('amount'))
+    c = int(b['amount__sum'])-int(a['amount__sum'])
+    context = {'persons': ExpenseDetail.objects.filter(person=person_id).all(),
+               'incomes': Income.objects.filter(person=person_id).all(),
+               'names': Person.objects.filter(id=person_id).first(),
+               'sum_exp': a,
+               'sum_inc': b,
+               'rest': c}
     return render(request, 'about_persons.html', context)
+
+
+class Search(FormView):
+    template_name = 'search.html'
+    form_class = SearchForm
+
+    def form_valid(self, form, person_id):
+        data = form.cleaned_data
+        result_exp = ExpenseDetail.objects.filter(person=person_id).all()
+        result_inc = Income.objects.filter(person=person_id).all()
+        if data['min_date']:
+            result_exp = result_exp.filter(date__gte=data['min_date'])
+        if data['max_date']:
+            result_inc = result_inc.filter(price__lte=data['max_date'])
+        a = result_exp.aggregate(Sum('amount'))
+        b = result_inc.aggregate(Sum('amount'))
+        c = int(b['amount__sum']) - int(a['amount__sum'])
+        context = {'persons': result_exp,
+                   'incomes': result_inc,
+                   'names': Person.objects.filter(id=person_id).first(),
+                   'sum_exp': a,
+                   'sum_inc': b,
+                   'rest': c}
+        return render(self.request, 'about_persons.html', context)

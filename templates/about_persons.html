@@ -1,4 +1,7 @@
+ <h3>Расходы {{ names.name }}</h3><br>
+
 <table border="1">
+
             <tr>
                 <td>Описание расходов</td>
                 <td>Сумма расхода</td>
@@ -10,6 +13,34 @@
                     <td>{{ person.description }}</td>
                     <td>{{ person.amount }}</td>
                     <td>{{ person.date }}</td>
+
+                </tr>
+            {% endfor %}
+    </table>
+
+            <h3>Итого расходов: {{ sum_exp.amount__sum }}</h3><br>
+             <br>
+            <h3>Доходы {{ names.name }}</h3><br>
+<table border="1">
+
+            <tr>
+                <td>Описание доходов</td>
+                <td>Сумма дохода</td>
+                <td>Дата</td>
+
+            </tr>
+                {% for income in incomes %}
+                <tr>
+                    <td>{{ income.name }}</td>
+                    <td>{{ income.amount }}</td>
+                    <td>{{ income.date }}</td>
+
                 </tr>
             {% endfor %}
         </table>
+
+ <h3>Итого доходов: {{ sum_inc.amount__sum }}</h3><br>
+             <br>
+
+<h3>Остаток: {{rest}}</h3><br>
+             <br>

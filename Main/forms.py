@@ -9,3 +9,8 @@ class ExpenseCreateForm(forms.ModelForm):
 
         model = Expense
         fields = ('name',)
+
+
+class SearchForm(forms.Form):
+    min_date = forms.DateField(label='Дата начала', required = False)
+    max_date = forms.DateField(label='Дата окончания', required = False)
