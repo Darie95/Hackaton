@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^edit/(?P<person_id>\d+)/$', views.edit, name = 'edit'),
     url(r'^addcategory/$', views.AddExpense.as_view()),
     url(r'^person/(?P<person_id>\d+)/$', views.person, name = 'person'),
+    url(r'^add/(?P<person_id>\d+)/$', views.Add.as_view(), name = 'add'),
     url(r'^person/(?P<person_id>\d+)/date/$', views.Search.as_view()),
 ]
 urlpatterns += staticfiles_urlpatterns()

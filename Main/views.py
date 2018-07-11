@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.views import View
+
 from Main.forms import ExpenseCreateForm, SearchForm
 from Main.models import Expense, ExpenseDetail, Income, Person
 from django.views.generic import CreateView, FormView
@@ -19,6 +21,23 @@ def edit(request, expense_id):
     expense = ExpenseDetail.objects.filter(expense_id=expense_id).all()
     name = Expense.objects.filter(id = expense_id).first()
     return render(request, 'edit.html', {'expense': expense, 'name': name })
+
+class Add(View):
+    def get(self, request, person_id):
+        context = {
+            'expense': Expense.objects.all()
+        }
+        return render(request, 'add.html', context)
+
+    def post(self, request, person_id):
+        ExpenseDetail.objects.create(
+                description=request.POST.get('description'),
+                amount=int(request.POST.get('amount')),
+                date=request.POST.get('date'),
+                person_id = person_id,
+                expense_id=request.POST.get('expense')
+            )
+        return redirect('about_person')
 
 
 class AddExpense(CreateView):

@@ -17,8 +17,11 @@
                 </tr>
             {% endfor %}
     </table>
-
+ <a href="{% url 'add' names.id %}" > Добавить расходы </a>
             <h3>Итого расходов: {{ sum_exp.amount__sum }}</h3><br>
+
+
+
              <br>
             <h3>Доходы {{ names.name }}</h3><br>
 <table border="1">
